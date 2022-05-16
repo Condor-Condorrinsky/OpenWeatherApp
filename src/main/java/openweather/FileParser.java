@@ -2,7 +2,9 @@ package openweather;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Objects;
 
 public class FileParser {
     
@@ -13,26 +15,35 @@ public class FileParser {
 
     public FileParser(){}
 
-    public void findCity (String city){
+    public String[] findCity (String city){
+
+        String[] cityData = new String[] {null, null, null};
 
         try {
             scanner = new Scanner(cityDatabase);
-            }
-            catch (FileNotFoundException fileNotFoundException){
-                System.err.println("Cannot find city database. Quting!");
-                System.exit(-1);
-            }
+        }
+        catch (FileNotFoundException fileNotFoundException){
+            System.err.println("Cannot find city database. Quiting!");
+            System.exit(-1);
+        }
+
+        do {
+            cityData = Arrays.stream(scanner.nextLine().split(", ")).toArray(String[]::new);
+        }
+        while(scanner.hasNext() && !Objects.equals(city, cityData[0]));
+
+        return cityData;
     }
 
     public String readAPI_key (){
 
         try {
             scanner = new Scanner(API_key);
-            }
-            catch (FileNotFoundException fileNotFoundException){
-                System.err.println("Cannot find API key. Quting!");
-                System.exit(-1);
-            }
+        }
+        catch (FileNotFoundException fileNotFoundException){
+            System.err.println("Cannot find API key. Quiting!");
+            System.exit(-1);
+        }
 
         return scanner.nextLine();
     }

@@ -8,6 +8,11 @@
     <artifactId>open-weather-app</artifactId>
     <version>1.0.0</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>18</maven.compiler.release>
+    </properties>
+
     <build>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <scriptSourceDirectory>${basedir}/src/main/scripts</scriptSourceDirectory>
@@ -15,6 +20,16 @@
         <outputDirectory>${basedir}/target/classes</outputDirectory>
         <testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
         <directory>${basedir}/target</directory>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
       </build>
 
     <dependencies>
