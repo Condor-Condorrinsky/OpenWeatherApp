@@ -4,9 +4,18 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.openweatherapp.tink</groupId>
+    <groupId>src</groupId>
     <artifactId>open-weather-app</artifactId>
     <version>1.0.0</version>
+
+    <build>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <scriptSourceDirectory>${basedir}/src/main/scripts</scriptSourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+        <outputDirectory>${basedir}/target/classes</outputDirectory>
+        <testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
+        <directory>${basedir}/target</directory>
+      </build>
 
     <dependencies>
         <dependency>
