@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class FileParser {
     
-    private final File cityDatabase = new File("../../../resources/city_list");
-    private final File API_key = new File("../../../resources/API_key");
+    private final File cityDatabase = new File("src/main/resources/city_list");
+    private final File API_key = new File("src/main/resources/API_key");
 
     private Scanner scanner;
 
