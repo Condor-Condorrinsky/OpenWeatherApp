@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class FileParser {
     
-    private final File cityDatabase = new File("src/main/resources/city_list");
+    private File cityDatabase;
     private final File API_key = new File("src/main/resources/API_key");
 
     private Scanner scanner;
@@ -46,5 +46,9 @@ public class FileParser {
         }
 
         return scanner.nextLine();
+    }
+
+    public void setCityDatabase (String path){
+        cityDatabase = new File(path);
     }
 }
