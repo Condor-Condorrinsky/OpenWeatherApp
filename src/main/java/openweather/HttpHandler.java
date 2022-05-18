@@ -51,5 +51,4 @@ public class HttpHandler {
     public HttpClient getClient(){
         return client;
     }
-
 }
