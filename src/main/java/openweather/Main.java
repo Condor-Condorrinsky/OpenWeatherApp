@@ -29,19 +29,25 @@ public class Main{
         //System.out.println(response);
         JsonHandler handler = new JsonHandler();
 
-        switch (mode){
+        switch (args[1]){
             case "daily":
                 for (int i = 0; i < 8; i++){
-                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.min"));
-                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.max"));
-                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.day"));
-                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".humidity"));
+                    System.out.println(String.format("Minimal temperature in %d days", i));
+                    System.out.println(handler.getDailyTemps(response, "daily", i, "temp", "min"));
+                    System.out.println(String.format("Maximal temperature in %d days", i));
+                    System.out.println(handler.getDailyTemps(response, "daily", i, "temp", "max"));
+                    System.out.println(String.format("Average temperature in %d days", i));
+                    System.out.println(handler.getDailyTemps(response, "daily", i, "temp", "day"));
+                    System.out.println(String.format("Probability of rain in %d days", i));
+                    System.out.println(handler.getOthers(response, "daily", i, "humidity"));
                 }
                break;
             case "hourly":
                 for (int i = 0; i < 48; i++){
-                    System.out.println(handler.getValueOutOfJsonString(response, "hourly." + Integer.toString(i) + ".temp"));
-                    System.out.println(handler.getValueOutOfJsonString(response, "hourly." + Integer.toString(i) + ".humidity"));
+                    System.out.println(String.format("Temperature in %d hours", i));
+                    System.out.println(handler.getOthers(response, "hourly", i, "temp"));
+                    System.out.println(String.format("Probability of rain in %d hours", i));
+                    System.out.println(handler.getOthers(response, "hourly", i, "humidity"));
                 }
                 break;
         }

@@ -1,14 +1,37 @@
 package openweather;
 
-import com.google.gson.*;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
 public class JsonHandler {
     
     public JsonHandler (){}
 
-    public String getValueOutOfJsonString (String jsonString, String value){
+    public String getDailyTemps (String jsonString, String firstLevel, int i, String secondLevel, String thirdLevel){
 
-        JsonObject object = JsonParser.parseString(jsonString).getAsJsonObject();
-        return object.get(value).getAsString();
+        JsonElement element = JsonParser
+        .parseString(jsonString)
+        .getAsJsonObject()
+        .getAsJsonArray(firstLevel)
+        .get(i)
+        .getAsJsonObject()
+        .get(secondLevel)
+        .getAsJsonObject()
+        .get(thirdLevel);
+        
+        return element.getAsString();
+    }
+
+    public String getOthers (String jsonString, String firstLevel, int i, String secondLevel){
+
+        JsonElement element = JsonParser
+        .parseString(jsonString)
+        .getAsJsonObject()
+        .getAsJsonArray(firstLevel)
+        .get(i)
+        .getAsJsonObject()
+        .get(secondLevel);
+
+        return element.getAsString();
     }
 }
