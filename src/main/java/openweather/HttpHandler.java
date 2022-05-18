@@ -1,6 +1,8 @@
 package openweather;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,14 +16,15 @@ public class HttpHandler {
         this.client = HttpClientBuilder.create().build();
     }
 
-    public void makeGetRequest(String[] city, String mode, String API_key){
+    public String makeGetRequest(String[] city, String mode, String API_key){
 
         HttpGet getRequest = new HttpGet
         (String.format("https://api.openweathermap.org/data/2.5/onecall?lat=%1$s&lon=%2$s&exclude=%3$s&appid=%4$s",
         city[1], city[2], mode, API_key));
 
         getRequest.addHeader("accept", "application/json");
-        HttpResponse response;
+        HttpResponse response = null;
+        String jsonString = null;
 
         try {
             response = client.execute(getRequest);
@@ -31,21 +34,18 @@ public class HttpHandler {
                 System.exit(-1);
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
-			String output;
-			System.out.println("============Output:============");
- 
-			// Simply iterate through XML response and show on console.
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
-			}
+            InputStream is = response.getEntity().getContent();
+            response.getEntity().getContent();
+            jsonString = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
+                  .lines()
+                  .collect(Collectors.joining("\n"));
         }
         catch (IOException exc) {
             System.err.println("Couldn't execute http request. Quiting!");
             System.exit(-1);
         }
 
-        
+        return jsonString;
     }
 
     public HttpClient getClient(){
