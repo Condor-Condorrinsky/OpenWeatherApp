@@ -27,6 +27,3 @@ target/
 
 # Visual Studio Code files
 .vscode/
-
-# Other
-example_response.json

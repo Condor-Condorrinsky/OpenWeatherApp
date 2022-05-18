@@ -1,7 +1,5 @@
 package openweather;
 
-//import java.util.Arrays;
-
 public class Main{
 
     public static void main(String[] args) {
@@ -28,15 +26,23 @@ public class Main{
         }
         
         String response = new HttpHandler().makeGetRequest(city, mode, key);
-        System.out.println(response);
+        //System.out.println(response);
         JsonHandler handler = new JsonHandler();
 
         switch (mode){
             case "daily":
-
-                break;
+                for (int i = 0; i < 8; i++){
+                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.min"));
+                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.max"));
+                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".temp.day"));
+                    System.out.println(handler.getValueOutOfJsonString(response, "daily." + Integer.toString(i) + ".humidity"));
+                }
+               break;
             case "hourly":
-
+                for (int i = 0; i < 48; i++){
+                    System.out.println(handler.getValueOutOfJsonString(response, "hourly." + Integer.toString(i) + ".temp"));
+                    System.out.println(handler.getValueOutOfJsonString(response, "hourly." + Integer.toString(i) + ".humidity"));
+                }
                 break;
         }
     }

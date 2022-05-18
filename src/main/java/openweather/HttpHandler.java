@@ -19,7 +19,7 @@ public class HttpHandler {
     public String makeGetRequest(String[] city, String mode, String API_key){
 
         HttpGet getRequest = new HttpGet
-        (String.format("https://api.openweathermap.org/data/2.5/onecall?lat=%1$s&lon=%2$s&exclude=%3$s&appid=%4$s",
+        (String.format("https://api.openweathermap.org/data/2.5/onecall?lat=%1$s&lon=%2$s&units=metric&exclude=%3$s&appid=%4$s",
         city[1], city[2], mode, API_key));
 
         getRequest.addHeader("accept", "application/json");
