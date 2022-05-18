@@ -11,6 +11,7 @@ public class Main{
         String key = parser.readAPI_key();
         parser.setCityDatabase(args[0]);
         String[] city = parser.findCity(args[2]);
+
         String mode;
 
         switch (args[1]){
@@ -21,12 +22,22 @@ public class Main{
                 mode = Mode.HOURLY.getPattern();
                 break;
             default:
-                System.out.println("Did not choose correct mode, defaulting to daily");
+                System.out.println("Did not choose correct mode, defaulting to daily\n");
                 mode = Mode.DAILY.getPattern();
                 break;
         }
         
-        HttpHandler handler = new HttpHandler();
-        handler.makeGetRequest(city, mode, key);
+        String response = new HttpHandler().makeGetRequest(city, mode, key);
+        System.out.println(response);
+        JsonHandler handler = new JsonHandler();
+
+        switch (mode){
+            case "daily":
+
+                break;
+            case "hourly":
+
+                break;
+        }
     }
 }
