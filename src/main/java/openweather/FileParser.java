@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Objects;
 
@@ -21,16 +22,21 @@ public class FileParser {
 
         try {
             scanner = new Scanner(cityDatabase);
+
+            do {
+                cityData = Arrays.stream(scanner.nextLine().split(", ")).toArray(String[]::new);
+            }
+            while(scanner.hasNext() && !Objects.equals(city, cityData[0]));
         }
-        catch (FileNotFoundException fileNotFoundException){
-            System.err.println("Cannot find city database. Quiting!");
+        catch (FileNotFoundException | NoSuchElementException exception){
+            System.err.println("There was problem with parsing the file");
             System.exit(-1);
         }
 
-        do {
-            cityData = Arrays.stream(scanner.nextLine().split(", ")).toArray(String[]::new);
+        if (!Objects.equals(city, cityData[0])) {
+            System.err.println("Given city is not present in the database. Quiting!");
+            System.exit(-1);
         }
-        while(scanner.hasNext() && !Objects.equals(city, cityData[0]));
 
         return cityData;
     }

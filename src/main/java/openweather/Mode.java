@@ -2,16 +2,22 @@ package openweather;
 
 public enum Mode {
 
-    HOURLY("current,minutely,daily,alerts"),
-    DAILY("current,minutely,hourly,alerts");
+    HOURLY("hourly", "current,minutely,daily,alerts"),
+    DAILY("daily", "current,minutely,hourly,alerts");
 
-    private String pattern;
+    private String type;
+    private String excluded;
 
-    Mode (String text){
-        this.pattern = text;
+    Mode (String type, String excluded){
+        this.type = type;
+        this.excluded = excluded;
     }
 
-    public String getPattern (){
-        return pattern;
+    public String getType (){
+        return type;
+    }
+
+    public String getExcluded(){
+        return excluded;
     }
 }

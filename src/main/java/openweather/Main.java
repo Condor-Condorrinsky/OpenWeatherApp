@@ -5,6 +5,11 @@ public class Main{
     public static void main(String[] args) {
         // args[0] - ścieżka do pliku, args[1] - rodzaj prognozy, args[2] - nazwa miasta
 
+        if (args.length != 3) {
+            System.out.println("Wrong number of args. Quiting!");
+            System.exit(-1);
+        }
+
         FileParser parser = new FileParser();
         String key = parser.readAPI_key();
         parser.setCityDatabase(args[0]);
@@ -14,14 +19,15 @@ public class Main{
 
         switch (args[1]){
             case "daily":
-                mode = Mode.DAILY.getPattern();
+                mode = Mode.DAILY.getExcluded();
                 break;
             case "hourly":
-                mode = Mode.HOURLY.getPattern();
+                mode = Mode.HOURLY.getExcluded();
                 break;
             default:
                 System.out.println("Did not choose correct mode, defaulting to daily\n");
-                mode = Mode.DAILY.getPattern();
+                mode = Mode.DAILY.getExcluded();
+                args[1] = Mode.DAILY.getType();
                 break;
         }
         
