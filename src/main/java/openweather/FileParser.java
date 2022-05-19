@@ -10,8 +10,6 @@ import java.util.Objects;
 public class FileParser {
     
     private File cityDatabase;
-    //private final File API_key = new File("src/main/resources/API_key");
-    //private final File API_key = new File("API_key");
 
     private Scanner scanner;
 
@@ -39,10 +37,8 @@ public class FileParser {
 
     public String readAPI_key (){
 
-            InputStream in = getClass().getResourceAsStream("/API_key");
-            scanner = new Scanner(in);
-        
-        
+        InputStream in = getClass().getResourceAsStream("/API_key");
+        scanner = new Scanner(in);
 
         return scanner.nextLine();
     }
