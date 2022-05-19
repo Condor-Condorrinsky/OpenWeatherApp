@@ -47,8 +47,4 @@ public class HttpHandler {
 
         return jsonString;
     }
-
-    public HttpClient getClient(){
-        return client;
-    }
 }
