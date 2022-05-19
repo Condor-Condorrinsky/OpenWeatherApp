@@ -18,6 +18,6 @@ Powinien powstać folder *target*. Aby uruchomić program, należy wywołać:
 
 *cd target*
 
-*java -jar openweather-app-1.0.0.jar [ścieżka do pliku z miastami] [hourly/daily] [nazwa miasta po angielsku]*
+*java -jar open-weather-app-1.0.0.jar [ścieżka do pliku z miastami] [hourly/daily] [nazwa miasta po angielsku]*
 
 Powstaly plik *.jar* stanowi samodzielną aplikację. Można go skopiować i przenieść w dowolne miejsce. Będzie on działał tak długo, jak na uruchamiającym komputerze znajduje się *JRE* i system *Maven*.

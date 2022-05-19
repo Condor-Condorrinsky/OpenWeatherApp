@@ -2,6 +2,7 @@ package openweather;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Objects;
@@ -9,7 +10,8 @@ import java.util.Objects;
 public class FileParser {
     
     private File cityDatabase;
-    private final File API_key = new File("src/main/resources/API_key");
+    //private final File API_key = new File("src/main/resources/API_key");
+    //private final File API_key = new File("API_key");
 
     private Scanner scanner;
 
@@ -37,13 +39,10 @@ public class FileParser {
 
     public String readAPI_key (){
 
-        try {
-            scanner = new Scanner(API_key);
-        }
-        catch (FileNotFoundException fileNotFoundException){
-            System.err.println("Cannot find API key. Quiting!");
-            System.exit(-1);
-        }
+            InputStream in = getClass().getResourceAsStream("/API_key");
+            scanner = new Scanner(in);
+        
+        
 
         return scanner.nextLine();
     }
