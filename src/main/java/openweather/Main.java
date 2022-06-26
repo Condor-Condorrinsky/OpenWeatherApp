@@ -15,12 +15,27 @@ public class Main{
         parser.setCityDatabase(args[0]);
         String[] city = parser.findCity(args[2]);
 
-        String mode = chooseMode(args[1]);
+        String excluded = chooseExcluded(args[1]);
+
+        String response = new HttpHandler().makeGetRequest(city, excluded, key);
         
         printResults(city, mode, key);
     }
 
     public static String chooseMode(String mode){
+
+        switch (mode){
+            case "daily":
+                return Mode.DAILY.getType();
+            case "hourly":
+                return Mode.HOURLY.getType();
+            default:
+                System.out.println("Did not choose correct mode, defaulting to daily\n");
+                return Mode.DAILY.getType();
+        }
+    }
+
+    public static String chooseExcluded(String mode){
 
         switch (mode){
             case "daily":
@@ -33,9 +48,8 @@ public class Main{
         }
     }
 
-    public static void printResults(String[] city, String mode, String key){
+    public static void printResults(String response, String excluded){
 
-        String response = new HttpHandler().makeGetRequest(city, mode, key);
         JsonHandler handler = new JsonHandler();
 
         switch (mode){
