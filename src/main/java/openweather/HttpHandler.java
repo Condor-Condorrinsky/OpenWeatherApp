@@ -9,6 +9,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class HttpHandler {
+
+    private static final int HTTP_OK = 200;
     
     private HttpClient client;
 
@@ -29,7 +31,7 @@ public class HttpHandler {
         try {
             response = client.execute(getRequest);
 
-            if (response.getStatusLine().getStatusCode() != 200) {
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
                 System.err.println("Failed to fetch data - error code: " + response.getStatusLine().getStatusCode());
                 System.exit(-1);
             }
