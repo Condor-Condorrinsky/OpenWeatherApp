@@ -19,20 +19,7 @@ public class Main{
 
         String response = new HttpHandler().makeGetRequest(city, excluded, key);
         
-        printResults(city, mode, key);
-    }
-
-    public static String chooseMode(String mode){
-
-        switch (mode){
-            case "daily":
-                return Mode.DAILY.getType();
-            case "hourly":
-                return Mode.HOURLY.getType();
-            default:
-                System.out.println("Did not choose correct mode, defaulting to daily\n");
-                return Mode.DAILY.getType();
-        }
+        printResults(response, args[1]);
     }
 
     public static String chooseExcluded(String mode){
@@ -48,7 +35,7 @@ public class Main{
         }
     }
 
-    public static void printResults(String response, String excluded){
+    public static void printResults(String response, String mode){
 
         JsonHandler handler = new JsonHandler();
 
