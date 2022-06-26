@@ -11,7 +11,6 @@ import java.util.Objects;
 public class FileParser {
     
     private File cityDatabase;
-
     private Scanner scanner;
 
     public FileParser(){}

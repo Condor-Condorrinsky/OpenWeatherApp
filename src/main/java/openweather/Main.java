@@ -17,10 +17,28 @@ public class Main{
 
         String mode = chooseMode(args[1]);
         
+        printResults(city, mode, key);
+    }
+
+    public static String chooseMode(String mode){
+
+        switch (mode){
+            case "daily":
+                return Mode.DAILY.getExcluded();
+            case "hourly":
+                return Mode.HOURLY.getExcluded();
+            default:
+                System.out.println("Did not choose correct mode, defaulting to daily\n");
+                return Mode.DAILY.getExcluded();
+        }
+    }
+
+    public static void printResults(String[] city, String mode, String key){
+
         String response = new HttpHandler().makeGetRequest(city, mode, key);
         JsonHandler handler = new JsonHandler();
 
-        switch (args[1]){
+        switch (mode){
             case "daily":
                 for (int i = 0; i < 8; i++){
                     System.out.println(String.format("Minimal temperature in %d days", i));
@@ -42,19 +60,6 @@ public class Main{
                     System.out.println(handler.getOthers(response, "hourly", i, "humidity") + "%");
                 }
                 break;
-        }
-    }
-
-    public static String chooseMode(String mode){
-
-        switch (mode){
-            case "daily":
-                return Mode.DAILY.getExcluded();
-            case "hourly":
-                return Mode.HOURLY.getExcluded();
-            default:
-                System.out.println("Did not choose correct mode, defaulting to daily\n");
-                return Mode.DAILY.getExcluded();
         }
     }
 }
